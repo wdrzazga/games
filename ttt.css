@@ -1,11 +1,16 @@
+body{
+    background-color: white;
+}
+
 .top-bottom {
+
             border-top: 1px solid black;
             border-bottom: 1px solid black;
             border-left: none;
             border-right: none;
             padding: 80px;
-            text-align: left;
         }
+
 
 .left-right {
             border-top: None;
@@ -13,10 +18,14 @@
             border-left: 1px solid black;
             border-right: 1px solid black;
             padding: 80px;
-            text-align: left;
         }
+
 .center {
             border: 1px solid black;
             padding: 80px;
-            text-align: left;
         }
+
+td  {
+    font-size: 96px;
+    text-align: center;
+}
