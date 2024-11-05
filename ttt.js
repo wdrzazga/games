@@ -57,7 +57,23 @@ function checkWinning(){
         window.alert(td33 + " won");
         location.reload();
     }
-}
+
+    console.log('-----------------------');
+    var emptyCells = 0;
+    [td11, td21, td31, td12, td22, td32, td13, td23, td33].forEach(cell =>{
+            if (cell == ''){
+                emptyCells++;
+            }
+            else if (cell == ' '){
+                emptyCells++;
+            }
+        });
+
+    if (emptyCells === 0){
+        window.alert("draw");
+        location.reload();
+    }
+}//end checkWinning
 
 function click1() {
    console.log("klikak 1 " + ox.player);
