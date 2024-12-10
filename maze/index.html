@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze in JavaScript</title>
+    <style>
+        #maze {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-template-rows: repeat(10, 30px);
+            gap: 0px;
+        }
+        .wall {
+            background-color: black;
+        }
+        .path {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .start {
+			background-color: green;
+            color: green;
+            font-weight: bold;
+            font-size: 24px; /* Increase size for visibility */
+        }
+        .end {
+			background-color: red;
+            color: red;
+            font-weight: bold;
+            font-size: 24px; /* Increase size for visibility */
+        }
+    </style>
+</head>
+<body onkeypress="move(event);">
+    <div id="maze"></div>
+	<div id="coordinates">[0, 0]</div>
+    <script src="maze.js"></script>
+</body>
+</html>
