@@ -7,13 +7,13 @@ const maze = [
     [1, 0,   0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1],
     [1, 0,   1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
     [1, 0,   0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1,   1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0],
+    [1, 1,   1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 'T2'],
     [1, 1,   1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1],
     [1, 0,   0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1],
     [1, 0,   1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1],
     [1, 0,   0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [1, 1,   0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1],
-    [1, 1,   1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1,   1, 0, 'T1', 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1],
     [1, 1,   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'E', 1, 1]
 ];
 
@@ -31,15 +31,19 @@ function drawMaze(player) {
                 cell.textContent = '';
             } else if (maze[row][col] === 0) {
                 cell.classList.add('path');
-				cell.innerHTML =  player.x === col && player.y === row ?'<img src="player.png"/>' : '';                
+				cell.innerHTML =  player.x === col && player.y === row ?'<img src="images/player.png"/>' : '';
             } else if (maze[row][col] === 'S') {
                 cell.classList.add('start');
                 cell.textContent = 'S'; // Start point
-				cell.innerHTML =  player.x === col && player.y === row ?'<img src="player.png"/>' : '';
+				cell.innerHTML =  player.x === col && player.y === row ?'<img src="images/player.png"/>' : '';
             } else if (maze[row][col] === 'E') {
                 cell.classList.add('end');
                 cell.textContent = 'E'; // End point
-				cell.innerHTML =  player.x === col && player.y === row ?'<img src="happyPlayer.png"/>' : '';
+				cell.innerHTML =  player.x === col && player.y === row ?'<img src="images/happyPlayer.png"/>' : '';
+            } else if (maze[row][col] == 'T1') {
+                cell.innerHTML =  '<img src="images/t1.png"/>';
+            } else if (maze[row][col] == 'T2') {
+                cell.innerHTML =  '<img src="images/t2.png"/>';
             }
 
             mazeContainer.appendChild(cell);
