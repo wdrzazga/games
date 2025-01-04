@@ -83,12 +83,25 @@ function move(event){
 		}
 	}
 	else if (event.key === 'd') {
-	    if (maze[player.y][player.x+1] != 1)
+	    if (maze[player.y][player.x+1] != 1) {
 		    player.x ++;
+		    checkPortal();
+		}
 	}
 	
 	writeCoords(player);
 	drawMaze(player);	
+}
+
+const checkPortal = function() {
+    if (player.x === 4 && player.y === 14) {
+        player.y = 8;
+        player.x = 14;
+    }
+    else if (player.x === 15 && player.y === 8) {
+        player.x = 3;
+        player.y = 14;
+    }
 }
 
 function writeCoords(player){
