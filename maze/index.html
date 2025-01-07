@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze in JavaScript</title>
     <style>
+        button {
+            background-color: black;
+            border: solid black;
+            border-radius: 3px;
+        }
         #maze {
             display: grid;
             grid-template-columns: repeat(16, 30px);
@@ -35,8 +40,29 @@
     </style>
 </head>
 <body onkeypress="move(event);">
-    <div id="maze"></div>
-	<div id="coordinates">[0, 0]</div>
-    <script src="maze.js"></script>
+<table>
+    <tr>
+        <td>
+            <div id="maze"></div>
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table id="controls">
+                <tr> <td></td> <td> <button id="w" onclick="clickUp();"><img src="images/upArrow.png"></button></td> <td></td> </tr>
+                <tr> <td><button id="a" onclick="clickLeft();"><img src="images/leftArrow.png"></button></td> <td></td> <td><button id="d" onclick="clickRight();"><img src="images/rightArrow.png"></button></td> </tr>
+                <tr> <td></td> <td><button id="s" onclick="clickDown();"><img src="images/downArrow.png"></button></td> <td></td> </tr>
+            </table>
+        </td>
+        <td>
+
+            <div id="coordinates">[0, 0]</div>
+        </td>
+    </tr>
+</table>
+<script src="maze.js"></script>
 </body>
 </html>

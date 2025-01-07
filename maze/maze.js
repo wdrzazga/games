@@ -107,3 +107,35 @@ const checkPortal = function() {
 function writeCoords(player){
 	document.getElementById("coordinates").innerText = `x: ${player.x} y: ${player.y}`;
 }
+
+function clickUp(){
+    const event = {
+        key: 'w'
+    };
+
+    move(event);
+}
+
+function clickLeft(){
+    const event = {
+        key: 'a'
+    };
+
+    move(event);
+}
+
+function clickRight(){
+    const event = {
+        key: 'd'
+    };
+
+    move(event);
+}
+
+function clickDown(){
+    const event = {
+        key: 's'
+    };
+
+    move(event);
+}
