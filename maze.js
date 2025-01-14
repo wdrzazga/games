@@ -1,9 +1,16 @@
-let levelString = "level1";
-let maze = null;
+let level = sessionStorage.getItem("level");
 
-if (levelString === "level1") {
-    maze = level1;
+if (!level) {
+    sessionStorage.setItem("level", "level1");
 }
+
+levelTranslator = {
+    "level1": level1,
+    "level2": level2
+};
+
+let maze = levelTranslator[level];
+const player = new Player();
 
 const mazeContainer = document.getElementById('maze');
 
@@ -27,6 +34,9 @@ function drawMaze(player) {
                 cell.classList.add('end');
                 cell.textContent = 'E'; // End point
 				cell.innerHTML =  player.x === col && player.y === row ?'<img src="images/happyPlayer.png"/>' : '';
+				/*player.x = 1;
+				player.y = 0;
+				nextLevel();*/
             } else if (maze[row][col] == 'T1') {
                 cell.innerHTML =  '<img src="images/t1.png"/>';
             } else if (maze[row][col] == 'T2') {
@@ -38,14 +48,6 @@ function drawMaze(player) {
     }
 }
 
-class Player {
-	constructor() {
-		this.x = 1;
-		this.y = 0;
-	}
-}
-
-const player = new Player();
 drawMaze(player);
 
 function move(event){
@@ -125,4 +127,14 @@ function clickDown(){
     };
 
     move(event);
+}
+
+function nextLevel() {
+    if (level == "level1") {
+        level = "level2"
+    } else {
+        level = "level1"
+    }
+    sessionStorage.setItem("level", level);
+    location.reload();
 }
