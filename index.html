@@ -1,69 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
+    <title>Rózne gamesy moje bardzo super giga fajne, które zrobilem i sa bure.</title>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze in JavaScript</title>
-    <style>
-        button {
-            background-color: black;
-            border: solid black;
-            border-radius: 3px;
-        }
-        #maze {
-            display: grid;
-            grid-template-columns: repeat(16, 30px);
-            grid-template-rows: repeat(16, 30px);
-            gap: 0px;
-        }
-        .wall {
-            background-color: black;
-        }
-        .path {
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .start {
-			background-color: green;
-            color: green;
-            font-weight: bold;
-            font-size: 24px; /* Increase size for visibility */
-        }
-        .end {
-			background-color: red;
-            color: red;
-            font-weight: bold;
-            font-size: 24px; /* Increase size for visibility */
-        }
-    </style>
-</head>
-<body onkeypress="move(event);">
-<table>
-    <tr>
-        <td>
-            <div id="maze"></div>
-        </td>
-        <td>
-
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table id="controls">
-                <tr> <td></td> <td> <button id="w" onclick="clickUp();"><img src="images/upArrow.png"></button></td> <td></td> </tr>
-                <tr> <td><button id="a" onclick="clickLeft();"><img src="images/leftArrow.png"></button></td> <td></td> <td><button id="d" onclick="clickRight();"><img src="images/rightArrow.png"></button></td> </tr>
-                <tr> <td></td> <td><button id="s" onclick="clickDown();"><img src="images/downArrow.png"></button></td> <td></td> </tr>
-            </table>
-        </td>
-        <td>
-
-            <div id="coordinates">[0, 0]</div>
-        </td>
-    </tr>
-</table>
-<script src="levels.js"></script>
-<script src="maze.js"></script>
-</body>
+  </head>
+  <body>
+  <h1 id="logo">Games</h1>
+  <div class="container">
+    <br>
+    <a href="https://wdrzazga.github.io/games/ttt.html">Tic Taci i kolko i krzyzyk</a>
+    <br/>
+    <a href="https://wdrzazga.github.io/games/maze/index.html">Maze'owy Labirynth</a>
+    <br>
+  </div>
+  </body>
 </html>
