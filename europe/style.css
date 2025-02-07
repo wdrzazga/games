@@ -1,0 +1,42 @@
+body {
+    background-color: blue;
+	color: white;
+}
+svg path {
+    fill: gray;
+    transition: fill 0.2s;
+}
+svg path:hover {
+    fill: white;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    gap: 3px;
+    border-radius: 5px;
+}
+@keyframes wrongGuess {
+    0% {
+        fill: red;
+    }
+    33% {
+        fill: gray;
+    }
+    67% {
+        fill: red
+    }
+    100% {
+        fill: gray;
+    }
+}
+.blinking {
+    animation: wrongGuess 1.5s steps(1, end);
+}
+p {
+    font-size: 20px;
+}
