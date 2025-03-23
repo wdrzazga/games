@@ -1,8 +1,8 @@
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 1200,
     height: 600,
-    parent: 'phaser-example',
+    parent: 'map',
     physics: {
         default: 'arcade',
         arcade: {

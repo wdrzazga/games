@@ -6,9 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p id="stamina"></p>
-    <p id="time"></p>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
+    <table>
+        <tr><td><p id="stamina"></td></p>
+            <td><p id="time"></p></td>
+            <td><p id="coins"></p></td>
+            <td colspan="6"></td>
+        </tr>
+        <tr>
+            <td colspan="8"><div id="map"></div></td>
+            <td> <a href="shop.html"><img src="shop.png"></a></td>
+        </tr>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
     <script src="main.js"></script>
     <script src="app.js"></script>
 </body>
