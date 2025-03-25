@@ -24,6 +24,8 @@ class MainScene extends Phaser.Scene {
     static MAX_STAMINA = 100;
     static STAMINA_RECOVERY = 0.1;
     static REQUIRED_DISTANCE = 100;
+    static PLAYER_IMAGE_PATH = 'player.png'
+    static YELLOW_PLAYER_IMAGE_PATH = 'yellowPlayer.png'
     constructor() {
         super('MainScene');
         this.player = null;
@@ -32,7 +34,8 @@ class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('player', 'player.png');
+        this.load.image('player', MainScene.PLAYER_IMAGE_PATH);
+        this.load.image('yellow-player', MainScene.YELLOW_PLAYER_IMAGE_PATH);
         this.load.image('coin', 'coin.png');
     }
 
@@ -112,11 +115,12 @@ class MainScene extends Phaser.Scene {
 }
 
 class Item {
-    constructor(name, price, onbuy, removable){
+    constructor(name, price, onbuy, removable, object_=null){
         this.name = name;
         this.price = Number(price);
         this.onbuy = onbuy;
         this.removable = Boolean(removable);
+        this.object = object_
     }
 }
 
@@ -125,10 +129,15 @@ function moreStamina(){
     //game.scene.scenes[0].player
     MainScene.MAX_STAMINA += 20;
 }
+function yellowSkin() {
+    //MainScene.PLAYER_IMAGE_PATH = 'yellowPlayer.png';
+    game.scene.scenes[0].player.setTexture('yellow-player');
+}
 
 class Shop {
     constructor(){
-        this.items = [new Item('stamina-bonus', 20, moreStamina, false)];
+        const yellowSkinBtn = document.getElementById('buy-yellow-skin')
+        this.items = [new Item('stamina-bonus', 20, moreStamina, false), new Item('yellow-skin', 10, yellowSkin, true, yellowSkinBtn)];
     }
 
     buy(itemName){
@@ -137,7 +146,12 @@ class Shop {
                     if (coins >= item.price){
                         item.onbuy();
                         coins -= item.price;
-                        game.scenes.scene[0].updateInfo2();
+                        if (item.removable){
+                            this.items = this.items.filter(item_ => item_ !== item);
+                            item.object.remove();
+                        }
+
+                        game.scene.scenes[0].updateInfo2();
                     }
                 }
         });
