@@ -14,7 +14,12 @@
         </tr>
         <tr>
             <td colspan="8"><div id="map"></div></td>
-            <td> <a href="shop.html"><img src="shop.png"></a></td>
+            <td>
+                <div style="display: flex;">
+                    <p><img src="more_stamina.png">20 more max stamina</p>
+                    <button style="display: flex;" onclick="shop.buy('stamina-bonus');"><p>20 <img class="smallImg" src="coin.png"></p></button>
+                </div>
+            </td>
         </tr>
     </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>

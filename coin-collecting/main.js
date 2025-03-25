@@ -22,6 +22,7 @@ class Coin {
 
 class MainScene extends Phaser.Scene {
     static MAX_STAMINA = 100;
+    static STAMINA_RECOVERY = 0.1;
     static REQUIRED_DISTANCE = 100;
     constructor() {
         super('MainScene');
@@ -49,9 +50,16 @@ class MainScene extends Phaser.Scene {
     }
 
     updateInfo(time) {
-        document.getElementById('stamina').innerText = Math.floor(this.playerStamina);
+        this.updateInfo2();
         document.getElementById('time').innerText = Math.floor(time);
     }
+
+    updateInfo2() {
+        document.getElementById('stamina').innerText = Math.floor(this.playerStamina);
+        coinsP.innerText = coins
+    }
+
+
 
     checkCollision(){
         const coords =  this.distance([this.player.x, this.player.y], [this.coinObject.x, this.coinObject.y]);
@@ -84,11 +92,11 @@ class MainScene extends Phaser.Scene {
         }
         if (this.cursors.shift.isDown && this.playerStamina > 1) {
             speed = 8;
-            this.playerStamina -= 0.25;
+            this.playerStamina -= 0.30;
 
         } else {
             if (this.playerStamina < MainScene.MAX_STAMINA) {
-                this.playerStamina += 0.1;
+                this.playerStamina += MainScene.STAMINA_RECOVERY;
             }
         }
         if (this.cursors.left.isDown || this.aKey.isDown) {
@@ -102,3 +110,41 @@ class MainScene extends Phaser.Scene {
         }
     }
 }
+
+class Item {
+    constructor(name, price, onbuy, removable){
+        this.name = name;
+        this.price = Number(price);
+        this.onbuy = onbuy;
+        this.removable = Boolean(removable);
+    }
+}
+
+function moreStamina(){
+    console.log('Stamina shopping');
+    //game.scene.scenes[0].player
+    MainScene.MAX_STAMINA += 20;
+}
+
+class Shop {
+    constructor(){
+        this.items = [new Item('stamina-bonus', 20, moreStamina, false)];
+    }
+
+    buy(itemName){
+        this.items.forEach(item => {
+            if (item.name === itemName){
+                    if (coins >= item.price){
+                        item.onbuy();
+                        coins -= item.price;
+                        game.scenes.scene[0].updateInfo2();
+                    }
+                }
+        });
+
+    }
+}
+
+
+const shop = new Shop();
+
