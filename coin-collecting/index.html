@@ -15,13 +15,22 @@
         <td colspan="6"></td>
     </tr>
     <tr>
-        <td colspan="8" rowspan="2">
+        <td colspan="8" rowspan="3">
             <div id="map"></div>
         </td>
         <td>
             <div style="display: flex;">
                 <p><img src="more_stamina.png">20 more max stamina</p>
                 <button style="display: flex;" onclick="shop.buy('stamina-bonus');"><p>20 <img class="smallImg" src="coin.png"></p>
+                </button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="display: flex;">
+                <p><img src="coin.png" class="smallImg">Second coin</p>
+                <button id="buy-second-coin" style="display: flex;" onclick="shop.buy('second-coin');"><p>60 <img class="smallImg" src="coin.png"></p>
                 </button>
             </div>
         </td>

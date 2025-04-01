@@ -42,7 +42,7 @@ class MainScene extends Phaser.Scene {
     create() {
         this.player = this.physics.add.sprite(100, 450, 'player');
         this.player.setDepth(2);
-        this.coinObject = new Coin(this);
+        this.coinObjects = [new Coin(this)];
         //this.coinImg = this.
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -62,16 +62,14 @@ class MainScene extends Phaser.Scene {
         coinsP.innerText = coins
     }
 
-
-
     checkCollision(){
-        const coords =  this.distance([this.player.x, this.player.y], [this.coinObject.x, this.coinObject.y]);
-
-        if (coords[0] < MainScene.REQUIRED_DISTANCE &&  coords[1] < MainScene.REQUIRED_DISTANCE) {
-            return true
-        } else {
-            return false
+        for (let i = 0; i <this.coinObjects.length; i++) {
+            const coords =  this.distance([this.player.x, this.player.y], [this.coinObjects[i].x, this.coinObjects[i].y]);
+            if (coords[0] < MainScene.REQUIRED_DISTANCE &&  coords[1] < MainScene.REQUIRED_DISTANCE) {
+                return i;
+            }
         }
+        return -1;
     }
 
     distance(pos1, pos2){
@@ -88,8 +86,9 @@ class MainScene extends Phaser.Scene {
     update(time, delta) {
         let speed = 4;
         this.updateInfo(time);
-        if (this.checkCollision()){
-            this.coinObject.changeLocation()
+        const cIndex = this.checkCollision();
+        if (cIndex > -1){
+            this.coinObjects[cIndex].changeLocation()
             coins += 1
             coinsP.innerText = coins
         }
@@ -134,10 +133,18 @@ function yellowSkin() {
     game.scene.scenes[0].player.setTexture('yellow-player');
 }
 
+function newCoin() {
+    const s = game.scene.scenes[0];
+    s.coinObjects.push(new Coin(s));
+}
+
 class Shop {
     constructor(){
-        const yellowSkinBtn = document.getElementById('buy-yellow-skin')
-        this.items = [new Item('stamina-bonus', 20, moreStamina, false), new Item('yellow-skin', 10, yellowSkin, true, yellowSkinBtn)];
+        const yellowSkinBtn = document.getElementById('buy-yellow-skin');
+        const secondCoinBtn = document.getElementById('buy-second-coin');
+        this.items = [new Item('stamina-bonus', 20, moreStamina, false)
+                    , new Item('yellow-skin', 10, yellowSkin, true, yellowSkinBtn)
+                    , new Item('second-coin', 60, newCoin, true, secondCoinBtn)];
     }
 
     buy(itemName){
