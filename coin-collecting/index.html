@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<table>
+    <tr>
+        <td><p id="stamina"></td>
+        </p>
+        <td><p id="time"></p></td>
+        <td><p id="coins"></p></td>
+        <td colspan="6"></td>
+    </tr>
+    <tr>
+        <td colspan="8" rowspan="3">
+            <div id="map"></div>
+        </td>
+        <td>
+            <div style="display: flex;">
+                <p><img src="more_stamina.png">20 more max stamina</p>
+                <button style="display: flex;" onclick="shop.buy('stamina-bonus');"><p>20 <img class="smallImg" src="coin.png"></p>
+                </button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="display: flex;">
+                <p><img src="coin.png" class="smallImg">Second coin</p>
+                <button id="buy-second-coin" style="display: flex;" onclick="shop.buy('second-coin');"><p>60 <img class="smallImg" src="coin.png"></p>
+                </button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="display: flex;">
+                <p><img src="yellowPlayer.png" class="smallImg">Yellow skin</p>
+                <button id="buy-yellow-skin" style="display: flex;" onclick="shop.buy('yellow-skin');"><p>10 <img class="smallImg" src="coin.png"></p>
+                </button>
+            </div>
+        </td>
+    </tr>
+</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+<script src="main.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
