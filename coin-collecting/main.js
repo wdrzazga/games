@@ -43,7 +43,6 @@ class MainScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(100, 450, 'player');
         this.player.setDepth(2);
         this.coinObjects = [new Coin(this)];
-        //this.coinImg = this.
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -114,12 +113,34 @@ class MainScene extends Phaser.Scene {
 }
 
 class Item {
-    constructor(name, price, onbuy, removable, object_=null){
+    constructor(name, price, onbuy, imgPath, removable=false){
+        const mapContainer = document.getElementById('mapContainer');
+        //const mainTable = document.getElementById('mainTable');
+        const mainTable = document.getElementsByTagName('tbody')[0];
         this.name = name;
         this.price = Number(price);
         this.onbuy = onbuy;
         this.removable = Boolean(removable);
-        this.object = object_
+        this.imgPath = imgPath
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = `${this.price}<img src="coin.png" class="smallImg">`;
+        this.image = document.createElement('img');
+        this.image.setAttribute('src', this.imgPath);
+        this.image.classList.add('smallImg');
+        this.text = document.createElement('p');
+        this.text.appendChild(this.image);
+        this.text.innerText += this.name;
+
+        mapContainer.setAttribute('rowspan',
+            Number(mapContainer.getAttribute('rowspan')) + 1);
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+
+        mainTable.appendChild(row);
+        row.appendChild(cell);
+        cell.appendChild(this.text);
+        cell.appendChild(this.btn);
+        cell.style.display = 'flex';
     }
 }
 
@@ -142,9 +163,10 @@ class Shop {
     constructor(){
         const yellowSkinBtn = document.getElementById('buy-yellow-skin');
         const secondCoinBtn = document.getElementById('buy-second-coin');
-        this.items = [new Item('stamina-bonus', 20, moreStamina, false)
-                    , new Item('yellow-skin', 10, yellowSkin, true, yellowSkinBtn)
-                    , new Item('second-coin', 60, newCoin, true, secondCoinBtn)];
+
+        this.items = [new Item('stamina-bonus', 20, moreStamina, 'more_stamina.png', false)
+                    , new Item('yellow-skin', 10, yellowSkin, 'yellowPlayer.png', true, yellowSkinBtn)
+                    , new Item('second-coin', 60, newCoin, 'coin.png', true, secondCoinBtn)];
     }
 
     buy(itemName){
