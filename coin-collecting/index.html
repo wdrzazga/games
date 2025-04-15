@@ -2,24 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kolekcja Coinów</title>
+    <title>Title</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <table id="mainTable">
     <tbody>
-    <tr>
-        <td><p id="stamina"></td>
-        </p>
-        <td><p id="time"></p></td>
-        <td><p id="coins"></p></td>
+    <tr class="container">
+        <td style="display: flex;"><div id="stamina"></div>&nbsp;Stejmina&nbsp;&nbsp;&nbsp;</td>
+        <td style="display: flex;"><p id="coins"><img src="coin.png" class="smallImg"></p></td>
         <td colspan="6"></td>
     </tr>
     <tr>
-        <td id="mapContainer" colspan="8" rowspan="3">
+        <td id="mapContainer" colspan="8" rowspan="1">
             <div id="map"></div>
         </td>
-    </tr>
     </tbody>
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>

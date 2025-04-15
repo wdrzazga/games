@@ -43,6 +43,7 @@ class MainScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(100, 450, 'player');
         this.player.setDepth(2);
         this.coinObjects = [new Coin(this)];
+        //this.coinImg = this.
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -53,12 +54,11 @@ class MainScene extends Phaser.Scene {
 
     updateInfo(time) {
         this.updateInfo2();
-        document.getElementById('time').innerText = Math.floor(time);
     }
 
     updateInfo2() {
         document.getElementById('stamina').innerText = Math.floor(this.playerStamina);
-        coinsP.innerText = coins
+        coinsP.innerHTML = `${coins}&nbsp;<img src="coin.png" class="smallImg">`
     }
 
     checkCollision(){
@@ -113,23 +113,17 @@ class MainScene extends Phaser.Scene {
 }
 
 class Item {
-    constructor(name, price, onbuy, imgPath, removable=false){
+    constructor(name, price, onbuy, removable, imgPath){
         const mapContainer = document.getElementById('mapContainer');
         //const mainTable = document.getElementById('mainTable');
         const mainTable = document.getElementsByTagName('tbody')[0];
+
         this.name = name;
         this.price = Number(price);
         this.onbuy = onbuy;
         this.removable = Boolean(removable);
-        this.imgPath = imgPath
-        this.btn = document.createElement('button');
-        this.btn.innerHTML = `${this.price}<img src="coin.png" class="smallImg">`;
-        this.image = document.createElement('img');
-        this.image.setAttribute('src', this.imgPath);
-        this.image.classList.add('smallImg');
-        this.text = document.createElement('p');
-        this.text.appendChild(this.image);
-        this.text.innerText += this.name;
+        this.imgPath = imgPath;
+        this.createElements();
 
         mapContainer.setAttribute('rowspan',
             Number(mapContainer.getAttribute('rowspan')) + 1);
@@ -141,12 +135,23 @@ class Item {
         cell.appendChild(this.text);
         cell.appendChild(this.btn);
         cell.style.display = 'flex';
+        this.btn.setAttribute('onclick', `shop.buy("${this.name}")`);
+    }
+
+    createElements(){
+        let visualName = this.name.replace('-', ' ');
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = `${this.price}<img src="coin.png" class="smallImg">`;
+        this.image = document.createElement('img');
+        this.image.setAttribute('src', this.imgPath);
+        this.image.classList.add('smallImg');
+        this.text = document.createElement('p');
+        this.text.innerHTML = `<img src="${this.imgPath}" class="smallImg">${visualName}`;
     }
 }
 
 function moreStamina(){
     console.log('Stamina shopping');
-    //game.scene.scenes[0].player
     MainScene.MAX_STAMINA += 20;
 }
 function yellowSkin() {
@@ -163,10 +168,9 @@ class Shop {
     constructor(){
         const yellowSkinBtn = document.getElementById('buy-yellow-skin');
         const secondCoinBtn = document.getElementById('buy-second-coin');
-
-        this.items = [new Item('stamina-bonus', 20, moreStamina, 'more_stamina.png', false)
-                    , new Item('yellow-skin', 10, yellowSkin, 'yellowPlayer.png', true, yellowSkinBtn)
-                    , new Item('second-coin', 60, newCoin, 'coin.png', true, secondCoinBtn)];
+        this.items = [new Item('stamina-bonus', 20, moreStamina, false, 'more_stamina.png')
+                    , new Item('yellow-skin', 10, yellowSkin, true, 'yellowPlayer.png')
+                    , new Item('second-coin', 60, newCoin, true, 'coin.png')];
     }
 
     buy(itemName){
@@ -177,7 +181,7 @@ class Shop {
                         coins -= item.price;
                         if (item.removable){
                             this.items = this.items.filter(item_ => item_ !== item);
-                            item.object.remove();
+                            item.btn.remove();
                         }
 
                         game.scene.scenes[0].updateInfo2();
