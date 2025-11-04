@@ -2,3 +2,8 @@
     width: 20px;
     height: 20px;
 }
+.container {
+    display: flex;
+    align-items: center;    /* Center vertically */
+    height: fit-content;          /* Full height of the viewport */
+}
